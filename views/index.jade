@@ -1,0 +1,14 @@
+html
+    head
+        title 五笔形
+        link(rel='stylesheet', href='style/main.css')
+
+    body
+        .container
+            h1#title 五笔形
+            form(action='/', method='GET')
+                input(type='text', name='char')
+                input(type='submit', value='搜索')
+            div#results
+                span#char #{char}:
+                span#codes #{codes}
