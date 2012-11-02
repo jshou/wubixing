@@ -1,9 +1,11 @@
 express = require 'express'
+inspect = require('eyes').inspect
 app = express()
 
 pg = require 'pg'
-connUrl = process.env.DATABASE_URL or 'postgres://jshou@localhost/wubi'
+connUrl = process.env.DATABASE_URL or 'postgres://jshou:password@localhost/wubi'
 client = new pg.Client(connUrl)
+client.connect()
 
 app.configure ->
   app.use '/style', express.static(__dirname + '/style')
@@ -11,10 +13,12 @@ app.configure ->
   app.set 'view engine', 'jade'
 
 app.get '/', (req, res) ->
-  console.log 'home'
-  client.query 'SELECT * FROM wubiDict WHERE char = $1', [req.query.char], (err, result) ->
-    codes = if err then '找不到！' else result[0].codes
-    client.close()
+  client.query 'SELECT * FROM wubiDict WHERE char = $1;', [req.query.char], (err, result) ->
+    console.log ''
+    console.log "getting codes from db for: #{req.query.char}"
+    console.log "ERRORS: #{err}"
+    console.log "RESULT: #{result}"
+    codes = if err then '找不到！' else '有东西'
     res.render 'index',
       char: req.query.char
       codes: codes
