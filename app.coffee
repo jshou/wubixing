@@ -12,7 +12,7 @@ app.configure ->
 
 app.get '/', (req, res) ->
   client.query
-    name: 'get codes'
+    name: 'get_codes'
     text: "SELECT * FROM wubiDict WHERE char = $1 LIMIT 1"
     values: [req.query.char]
   , (err, result) ->
