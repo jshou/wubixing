@@ -10,8 +10,8 @@ html
                 input(type='text', name='char')
                 input(type='submit', value='搜索')
             div#results
-                span#char #{char}:
-                span#codes
+                div#char #{char}:
+                div#codes
                   ul
                     - for (var i=0; i< codes.length; i++) {
                       li= codes[i]
