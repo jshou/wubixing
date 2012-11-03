@@ -11,4 +11,8 @@ html
                 input(type='submit', value='搜索')
             div#results
                 span#char #{char}:
-                span#codes #{codes}
+                span#codes
+                  ul
+                    - for (var i=0; i< codes.length; i++) {
+                      li= codes[i]
+                    - }
