@@ -28,6 +28,6 @@ app.get '/', (req, res) ->
       codes = result.rows[0].codes
     res.render 'index',
       char: req.query.char
-      codes: codes.split(' ')
+      codes: codes.split ' '
 
 app.listen process.env.PORT or 3000
