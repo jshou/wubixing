@@ -1,10 +1,8 @@
 express = require 'express'
 inspect = require('eyes').inspect
 app = express()
+client = require './db'
 
-pg = require 'pg'
-connUrl = process.env.DATABASE_URL or 'postgres://jshou:password@localhost/wubi'
-client = new pg.Client(connUrl)
 client.connect()
 
 app.configure ->
