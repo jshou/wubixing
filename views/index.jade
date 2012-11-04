@@ -1,11 +1,13 @@
 html
     head
-        title 五笔形
+        title 五笔形键码组合查询
         link(rel='stylesheet', href='style/main.css')
 
     body
         .container
             h1#title 五笔形
+            h3 键码组合查询
+            h4 请输入要搜查五笔键码组合的单字
             form(action='/', method='GET')
                 input(type='text', name='char')
                 input(type='submit', value='搜索')
