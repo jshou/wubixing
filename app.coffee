@@ -10,7 +10,7 @@ app.configure ->
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
 
-app.get '/', (req, res) ->
+app.get '/*', (req, res) ->
   client.query
     name: 'get_codes'
     text: "SELECT * FROM wubiDict WHERE char = $1 LIMIT 1"
@@ -23,11 +23,14 @@ app.get '/', (req, res) ->
     console.log "RESULT: %j", result
 
     if err or result.rowCount < 1
-      codes = '找不到！'
+      if !req.query.char
+        codes = ''
+      else
+        codes = '找不到！'
     else
       codes = result.rows[0].codes
     res.render 'index',
-      char: req.query.char
+      char: req.query.char or ''
       codes: codes.split ' '
 
 app.listen process.env.PORT or 3000
